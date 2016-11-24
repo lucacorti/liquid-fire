@@ -8,7 +8,6 @@ export default function(nextTransitionName, options, ...rest) {
       'string' === typeof nextTransitionName
     );
 
-    var el = document.getElementsByTagName('html');
     var nextTransition = this.lookup(nextTransitionName);
     if (!options) {  options = {}; }
 
@@ -18,7 +17,9 @@ export default function(nextTransitionName, options, ...rest) {
     );
 
     // set scroll options via: this.use('scrollThen', 'ToLeft', {easing: 'spring'})
-    options = Ember.merge({duration: 500, offset: 0}, options);
+    options = Ember.merge({duration: 500, offset: 0, element: 'html'}, options);
+
+    var el = document.getElementsByTagName(options.element);
 
     // additional args can be passed through after the scroll options object
     // like so: this.use('scrollThen', 'moveOver', {duration: 100}, 'x', -1);
